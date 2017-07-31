@@ -5,6 +5,7 @@ docker-deps:
       - ca-certificates
       - curl
       - software-properties-common
+      - python-pip
 
 docker-repo:
   pkgrepo.managed:
@@ -22,3 +23,7 @@ docker-install:
     - require:
       - pkg: docker-deps
       - pkgrepo: docker-repo
+
+docker-py-install:
+  pip.installed:
+    - name: docker-py
