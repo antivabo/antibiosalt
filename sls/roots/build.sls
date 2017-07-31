@@ -15,6 +15,12 @@
     - source: salt://res/build/erlang_build.sh
     - mode: 755 
 
+remove_old_container:
+  docker_image.absent:
+    - names:
+      - antivabo/build
+    - force: True
+
 create-build-container:
   docker_image.present:
     - name: antivabo/build
