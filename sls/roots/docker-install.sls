@@ -5,7 +5,6 @@ docker-deps:
       - ca-certificates
       - curl
       - software-properties-common
-      - python26-pip
 
 docker-repo:
   pkgrepo.managed:
@@ -24,11 +23,22 @@ docker-install:
       - pkg: docker-deps
       - pkgrepo: docker-repo
 
+get-pip:
+  file.managed:
+    - name: /tmp/get-pip.py
+    - source: https://bootstrap.pypa.io/get-pip.py
+    - skip_verify: True
+
+pip-install:
+  cmd.run:
+    - name: python /tmp/get-pip.py
+    - require:
+      - get-pip
+    - cwd: /tmp
+
 dockerpy:
   pip.installed:
     - name: docker-py >=1.4.0
     - require:
-      - pkg: python-pip
-      - pkg: python-pip-whl
       - cmd: pip-install
     - reload_modules: True
