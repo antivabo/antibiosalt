@@ -1,12 +1,13 @@
-apt-get install -y git && \ 
+apt-get install -y git && \
 git clone https://github.com/antivabo/antibiosalt.git && \
 cd antibiosalt && \
 ./install_salt.sh
-./run_state.sh docker-install | build | run
-WARNING: `docker login` on build machine before run ./run_state.sh build, 
-account should have access to antivabo/ repo on dockerhub
+./run_state.sh docker-install | build | run | highstate
+WARNING: dont forget to run `docker login` on build machine
+before run ./run_state.sh build, account should have access
+to antivabo/ repo on dockerhub
 
 docker-install - install docker
 build - build app image and publish it to dockerhub
 run - run application
-highstate run all states
+highstate - do all
