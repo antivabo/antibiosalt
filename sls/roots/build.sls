@@ -35,3 +35,30 @@ run-build-container:
     - auto_remove: True
     - interactive: True 
     - binds: /host_build/artifacts:/artifacts
+
+prepare-app-container:
+  file.recurse:
+    - name: /host_build/run/
+    - source: salt://res/run/
+    - clean: True
+    - makedirs: True
+
+artifacts-ready:
+  file.exists:
+    - name: /host_build/artifacts
+    - require:
+      - run-build-container
+
+create-app-container:
+  docker_image.present:
+    - name: antivabo/app
+    - build: /host_build
+    - dockerfile: run/Dockerfile
+    - require:
+      - artifacts-ready
+      - prepare-app-container
+
+push-image-antivabo-app:
+  cmd.run:
+    - name: docker push antivabo/app
+
