@@ -1,0 +1,11 @@
+file_cient: local
+fileserver_backend:
+  - roots
+file_roots:
+  base:
+    - /srv/salt-masterless/antibio/roots
+pillar_roots:
+  base:
+    - /srv/salt-masterless/antibio/pillar
+
+log_level: debug
