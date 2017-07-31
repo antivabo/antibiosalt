@@ -27,6 +27,8 @@ python-pip:
   pkg.removed
 python-pip-whl:
   pkg.removed
+python-setuptools:
+  pkg.installed
 
 pip-install:
   cmd.run:
