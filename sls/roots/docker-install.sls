@@ -5,6 +5,7 @@ docker-deps:
       - ca-certificates
       - curl
       - software-properties-common
+      - python26-pip
 
 docker-repo:
   pkgrepo.managed:
@@ -22,17 +23,6 @@ docker-install:
     - require:
       - pkg: docker-deps
       - pkgrepo: docker-repo
-
-python-pip:
-  pkg.removed
-python-pip-whl:
-  pkg.removed
-python-setuptools:
-  pkg.installed
-
-pip-install:
-  cmd.run:
-    - name: easy_install pip
 
 dockerpy:
   pip.installed:
